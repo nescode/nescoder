@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load wagtailimages_tags wagtailcore_tags navigation_tags %}
+
+{% block content %}
+{% image page.banner_image original as image %}
+
+<!-- Intro -->
+  <div class="container">
+    <div class="col-10 offset-1">
+      <div class="intro-block">
+        <h2>Words should be well thought, it shape <strong class="intro-brand">The World.</strong></h2>
+        <h3>I write by passion and try to sync with nature.</h3>
+      </div>
+    </div>
+  </div> <!-- Container div -->
+
+  <!-- Blog list -->
+  {% if posts %}
+    <div class="content">
+      <div class="container">
+        <div class="col-10 offset-1">
+
+        {% for post in posts %}
+          <div class="row blog-row">
+            <div class="col">
+              <h6 class="blog-date">{{ post.date_published }}</h6>
+            </div>
+
+            <div class="col-10">
+              <a href="{{ post.url }}"><h2 class="display-4">{{ post.blog_title }}</h2></a>
+              <p class="card-text">{{ post.blog_introduction }}</p>
+            </div>
+          </div> <!-- Row div -->
+        {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Pagination -->
+
+  <div class="container">
+    {% if pages %}
+      <div class="col-md-6 offset-4">
+        <div class="pagination-block">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+
+                {% if pages.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ pages.previous_page_number }}">Previous</a>
+                  </li>
+                {% endif %}
+
+                {% for page_num in pages.paginator.page_range %}
+                  <li class="page-item" {% if page_num == pages.number %}class="active"{% endif %}>
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                  </li>
+                {% endfor %}
+
+                {% if pages.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ pages.next_page_number }}">Next</a>
+                  </li>
+                {% endif %}
+
+            </ul>
+          </nav>
+       </div>
+      </div>
+    {% endif %}
+  </div>
+
+
+{% endblock %}

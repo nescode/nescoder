@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags navigation_tags %}
+{% load staticfiles %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+    <!-- Intro -->
+
+    <div class="container">
+      <div class="col-10 offset-1">
+        <div class="intro-block">
+          <h2>Hello there, I am <strong class="intro-brand">{{ page.full_name }}.</strong></h2>
+          <h3>{{ page.intro }}</h3>
+        </div>
+      </div>
+    </div> <!-- Container div -->
+
+    <!-- Intro description -->
+
+    <div class="content">
+      <div class="container">
+         <div class="col-10 offset-1 intro-desc">
+            <h5>{{ page.work_intro }}<a href="#">more <i class="fas fa-arrow-right"></i></a></h5>
+        </div>
+    </div> <!-- Container div -->
+
+
+    <!-- Area of expertise -->
+
+    <div class="container">
+      <div class="col-10 offset-1">
+      <div class="row">
+        <div class="col-sm">
+          <div class="expertise-block text-center">
+            {% image page.left_logo original as image %}
+            <img src="{{ image.url }}" class="img-fluid home-logo" alt='{{ image.alt }}'>
+            <div class="heading-desc">
+            <h5>{{ page.left_heading }}</h5>
+            <p>{{ page.left_text }}</p>
+          </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="expertise-block text-center">
+            {% image page.center_logo original as image %}
+            <img src="{{ image.url }}" class="img-fluid home-logo" alt='{{ image.alt }}'>
+            <div class="heading-desc">
+            <h5>{{ page.center_heading }}</h5>
+            <p>{{ page.center_text }}</p>
+          </div>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="expertise-block text-center">
+            {% image page.right_logo original as image %}
+            <img src="{{ image.url }}" class="img-fluid home-logo" alt="{{ image.alt }}">
+            <div class="heading-desc">
+            <h5>{{ page.right_heading }}</h5>
+            <p>{{ page.right_text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div> <!-- Custom container div -->
+    </div>
+    </div> <!-- Content div -->
+
+      <!-- Latest post -->
+      <div class="post-home">
+      <div class="container">
+        <div class="row">
+
+          {% for post in posts.all %}
+            <div class="col-md">
+              <div class="card mb-3">
+                {% image post.blog_image original as image %}
+                <img class="img-fluid card-img-top" src="{{ image.url }}" alt="{{ image.alt }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ post.blog_title }}</h5>
+                  <p class="card-text">{{ post.blog_introduction }}<a href="{% pageurl post %}">more <i class="fas fa-arrow-right"></i></a> </p>
+                  <p class="card-text"><small class="text-muted">{{ post.date_published }}</small></p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+      </div> <!-- Row div -->
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="content">
+    <div class="container">
+      <div class="col-6 offset-3">
+        <h5>Newsletter</h5>
+        <p>Subscribe to get brief summaries of my articles. Expect no more than one mail per month.</p>
+
+        <form id="subscribe" form method="POST">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Email ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default" value="Subscribe" id = "email_submit">Subscribe</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div> <!-- Container -->
+  </div>
+
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+
+  $('#subscribe').submit(function(e){
+      e.preventDefault();
+      var email_id = $("#email_id").val();
+      if(email_id){
+        var csrfmiddlewaretoken = csrftoken;
+        var email_data = {"email_id": email_id,
+                          "csrfmiddlewaretoken" : csrfmiddlewaretoken};
+        $.ajax({
+          type : 'POST',
+          url :  '/subscribe/',
+          data : email_data,
+          success : function(response){
+            $('#email_id').val('');
+            if(response.status == "404"){
+              alert("This Email is already been subscribed!");
+            }
+            else{
+              alert("Thank you for Subscribing! Please Check your Email to Confirm the Subscription");
+            }
+          },
+          error: function(response) {
+            alert("Sorry Something went Wrong");
+            $('#email_id').val('');
+          }
+        });
+        return false;
+      }
+      else{
+        alert("Please provide correct email!");
+      }
+  });
+  </script>
+{% endblock %}
