@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags wagtailcore_tags navigation_tags %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <!-- Intro -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-10 offset-1">
+        <div class="intro-block">
+          <h2>{{ page.heading }} <strong class="intro-brand">{{ page.bold_text }}</strong></h2>
+          <h3>{{ page.one_liner }}</h3>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Container div -->
+
+
+<br><br>
+
+  <!--
+  =============================================
+  	Contact Us
+  ==============================================
+  -->
+  <div class="contact-us content">
+  	<div class="container">
+
+  		<div class="row">
+  			<div class="col-lg-7 col-md-6 col-xs-12">
+
+  				<div class="contact-us-form">
+
+  					<form class="form-validation" action="{% url 'enquiry' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" name='name' placeholder="">
+                </div>
+                <label for="exampleInputEmail1">Email Address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name='email' aria-describedby="emailHelp" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="text" class="form-control" id="contact" name='contact' placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="msg">Message</label>
+                <textarea class="form-control" id="msg" name='msg' rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn btn-success">Submit</button>
+  					</form>
+
+  				</div> <!-- /.contact-us-form -->
+
+  			</div> <!-- /.col- -->
+  			<div class="col-lg-5 col-md-6 col-xs-12">
+  				<div class="contact-address">
+  					<h2>Don’t hesitate to contact for any kind of information.</h2>
+  					<p>Reach me on this number</p>
+  					<a href="#" class="tran3s">+91 9800112235 | user@nescode.com</a>
+  					<ul>
+  						<li><a href="" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+  						<li><a href="" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+  						<li><a href="" class="tran3s"><i class="fa fa-google" aria-hidden="true"></i></a></li>
+  						<li><a href="" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+  					</ul>
+  				</div> <!-- /.contact-address -->
+  			</div> <!-- /.col- -->
+  		</div> <!-- /.row -->
+  	</div> <!-- /.conatiner -->
+
+
+  </div> <!-- /.contact-us -->
+
+{% endblock %}
