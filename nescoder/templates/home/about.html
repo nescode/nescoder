@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags wagtailcore_tags navigation_tags %}
+{% load staticfiles %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <!-- Intro -->
+
+  <div class="container">
+    <div class="col-10 offset-1">
+      <div class="intro-block">
+        <h2>{{ page.heading }} <strong class="intro-brand">{{ page.bold_text }}</strong></h2>
+        <h3>{{ page.one_liner }}</h3>
+      </div>
+    </div>
+  </div> <!-- Container div -->
+
+
+{% endblock %}

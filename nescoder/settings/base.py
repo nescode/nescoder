@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-from .local_settings import *
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -18,6 +21,12 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+# Email Configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'codenjump@gmail.com'
+EMAIL_HOST_PASSWORD = 'Dev@Fitness'
+EMAIL_PORT = 587
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -29,6 +38,7 @@ INSTALLED_APPS = [
     'search',
     'blog',
     'newsletter',
+    'enquiry',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -51,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +172,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Mailchimp
+MAILCHIMP_API_KEY = ''
+MAILCHIMP_SUBSCRIBE_LIST_ID = ''
 
 # Wagtail settings
 

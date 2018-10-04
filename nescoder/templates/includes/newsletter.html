@@ -1,0 +1,60 @@
+{% include 'includes/js.html' %}
+
+<!-- Newsletter -->
+<div class="content">
+  <div class="container">
+    <div class="col-6 offset-3">
+      <h5>Newsletter</h5>
+      <p>Subscribe to get brief summaries of my articles. Expect no more than one mail per month.</p>
+
+      <form id="subscribe" form method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" id="email_id" name="email_id" placeholder="Email ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-default" value="Subscribe" id = "email_submit">Subscribe</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div> <!-- Container -->
+</div>
+
+
+{% block script %}
+  <script type="text/javascript">
+
+  $('#subscribe').submit(function(e){
+      e.preventDefault();
+      var email_id = $("#email_id").val();
+      if(email_id){
+        var csrfmiddlewaretoken = csrftoken;
+        var email_data = {"email_id": email_id,
+                          "csrfmiddlewaretoken" : csrfmiddlewaretoken};
+        $.ajax({
+          type : 'POST',
+          url :  '/subscribe/',
+          data : email_data,
+          success : function(response){
+            $('#email_id').val('');
+            if(response.status == "404"){
+              alert("This Email is already been subscribed!");
+            }
+            else{
+              alert("Thank you for Subscribing! Please Check your Email to Confirm the Subscription");
+            }
+          },
+          error: function(response) {
+            alert("Sorry Something went Wrong");
+            $('#email_id').val('');
+          }
+        });
+        return false;
+      }
+      else{
+        alert("Please provide correct email!");
+      }
+  });
+  </script>
+{% endblock %}
