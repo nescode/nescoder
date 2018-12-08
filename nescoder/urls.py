@@ -9,6 +9,8 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 from newsletter import views as newsletter_views
+from enquiry import views as enquiry_views
+
 
 
 urlpatterns = [
@@ -19,6 +21,8 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^subscribe/', newsletter_views.subscribe, name = "subscribe"),
+    url(r'^contact/', enquiry_views.enquiry, name='enquiry'),
+
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:

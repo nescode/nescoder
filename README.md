@@ -1,3 +1,4 @@
-## Nescode Member's Website in Wagtail Framework
+## Nescode Member's Website in Wagtail Framework - Under development
 
-Website developed for Nescode employee who would like to setup their own website.
+Content management system for Nescode member on wagtail Framework. Development is still under progress, please do not use for production.
+

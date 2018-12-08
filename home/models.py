@@ -32,7 +32,7 @@ class HomePage(Page):
         help_text = 'Left Column Logo'
     )
     left_heading = models.CharField(max_length=20, blank=True, help_text = 'Left Column Heading')
-    left_text = models.CharField(max_length=50, blank=True, help_text = 'Left Column Text')
+    left_text = models.CharField(max_length=256, blank=True, help_text = 'Left Column Text')
 
     center_logo = models.ForeignKey(
         'wagtailimages.Image',
@@ -43,7 +43,7 @@ class HomePage(Page):
         help_text = 'Center Column Logo'
     )
     center_heading = models.CharField(max_length=20, blank=True, help_text='Center Column Heading')
-    center_text = models.CharField(max_length=50, blank=True, help_text='Center Column Text')
+    center_text = models.CharField(max_length=256, blank=True, help_text='Center Column Text')
 
     right_logo = models.ForeignKey(
         'wagtailimages.Image',
@@ -54,7 +54,7 @@ class HomePage(Page):
         help_text = 'Right Column Logo'
     )
     right_heading = models.CharField(max_length=20, blank=True, help_text='Right Column Heading')
-    right_text = models.CharField(max_length=50, blank=True, help_text='Right Column Text')
+    right_text = models.CharField(max_length=256, blank=True, help_text='Right Column Text')
 
     content_panels = Page.content_panels + [
         FieldPanel('full_name'),
@@ -78,3 +78,47 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
         context['posts'] = BlogPage.objects.live().order_by('-date_published')[:2]
         return context
+
+class WorkPage(Page):
+    heading = models.CharField(max_length=256, blank=True)
+    bold_text = models.CharField(max_length=20, blank=True)
+    one_liner = models.CharField(max_length=256, blank=True, help_text='One Liner Paragraph')
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('bold_text'),
+        FieldPanel('one_liner'),
+    ]
+
+class ArchivePage(Page):
+    heading = models.CharField(max_length=256, blank=True)
+    bold_text = models.CharField(max_length=20, blank=True)
+    one_liner = models.CharField(max_length=256, blank=True, help_text='One Liner Paragraph')
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('bold_text'),
+        FieldPanel('one_liner'),
+    ]
+
+class About(Page):
+    heading = models.CharField(max_length=256, blank=True)
+    bold_text = models.CharField(max_length=20, blank=True)
+    one_liner = models.CharField(max_length=256, blank=True, help_text='One Liner Paragraph')
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('bold_text'),
+        FieldPanel('one_liner'),
+    ]
+
+class Contact(Page):
+    heading = models.CharField(max_length=256, blank=True)
+    bold_text = models.CharField(max_length=20, blank=True)
+    one_liner = models.CharField(max_length=256, blank=True, help_text='One Liner Paragraph')
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('bold_text'),
+        FieldPanel('one_liner'),
+    ]
