@@ -138,3 +138,55 @@ a:hover{
   width: 70px;
   height: auto;
 }
+
+.contact-us-form {padding-right: 70px;}
+.contact-us-form form input,
+.contact-us-form form textarea {
+  background: #fff;
+  border: none;
+  border-bottom: 1px solid #f0eff4;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+.contact-us-form form input:focus,
+.contact-us-form form textarea:focus {
+  border-bottom-color: #00d747;
+}
+.contact-us-form form input {height: 50px;}
+.contact-us-form form textarea {
+  height: 150px;
+  max-height: 150px;
+  padding: 20px 0;
+}
+.contact-us-form form button {
+  width: 190px;
+  line-height: 55px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 3px;
+}
+
+.trans3s {
+	-webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+.contact-us .contact-address ul li {
+  display: inline-block;
+  margin-top: 30px;
+}
+.contact-us .contact-address ul li a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  line-height: 38px;
+  text-align: center;
+  color: #cccccc;
+  margin-right: 15px;
+}
